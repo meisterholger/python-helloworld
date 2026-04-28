@@ -30,5 +30,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80         # Port des Services
-      targetPort: 80   # Port des Containers
+      targetPort: 5000   # Port des Containers
   type: ClusterIP      # Interne Erreichbarkeit im Cluster
