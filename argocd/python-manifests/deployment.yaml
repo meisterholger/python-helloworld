@@ -4,7 +4,7 @@ metadata:
   name: meine-app-deployment
   namespace: default
 spec:
-  replicas: 2        # Startet zwei Instanzen deines Containers für Ausfallsicherheit
+  replicas: 2
   selector:
     matchLabels:
       app: meine-web-app
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: mein-container
-        image: meisterholger/python-helloworld:latest  # <--- HIER DEIN IMAGE EINTRAGEN
+        image: meisterholger/python-helloworld:v1  # Hier wird die Action die Zahl ändern
         ports:
-        - containerPort: 5000                           # Der Port, auf dem deine App im Docker-Container lauscht
+        - containerPort: 5000
