@@ -18,18 +18,3 @@ spec:
         image: meisterholger/python-helloworld:latest  # <--- HIER DEIN IMAGE EINTRAGEN
         ports:
         - containerPort: 5000                           # Der Port, auf dem deine App im Docker-Container lauscht
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: meine-app-service
-  namespace: default
-spec:
-  selector:
-    app: meine-web-app  # Muss mit dem Label im Deployment übereinstimmen (passt!)
-  ports:
-    - protocol: TCP
-      port: 80           # Port des Services innerhalb des Clusters
-      targetPort: 5000   # Port deines Flask-Containers
-      nodePort: 30080    # <--- DIESEN Port tippst du später im Browser ein
-  type: NodePort         # <--- Von ClusterIP auf NodePort geändert
