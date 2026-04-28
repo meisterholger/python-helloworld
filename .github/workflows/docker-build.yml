@@ -37,8 +37,11 @@ jobs:
 
       - name: Update deployment.yaml
         run: |
-          # Nutzt 'sed', um die Image-Zeile mit der neuen v-Nummer zu überschreiben
           sed -i "s|image: meisterholger/python-helloworld:.*|image: meisterholger/python-helloworld:v${{ github.run_number }}|g" argocd/python-manifests/deployment.yaml
+
+      - name: Update values.yaml
+        run: |
+          sed -i "s|tag: .*|tag: v${{ github.run_number }}|g" helm/values.yaml
 
       - name: Commit and push changes
         run: |
