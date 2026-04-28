@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: python-helloworld
+  namespace: argocd
+spec:
+  project: default
+  
+  source:
+    repoURL: https://github.com/meisterholger/python-helloworld
+    # Diese targetRevision wird automatisch aktualisiert zu neuesten Tag
+    # Alternative: Nutze '@latest' um immer den neuesten Tag zu nutzen
+    targetRevision: HEAD  # oder: v*  für alle Tags
+    path: helm
+    helm:
+      releaseName: python-helloworld
+      # Überschreibe Helm-Werte direkt beim Sync (statt values.yaml zu ändern)
+      parameters:
+        - name: deployment.image.tag
+          value: v${{ github.run_number }}  # Wird durch GitHub Actions gesetzt
+      # Alternative: Nutze latest Tag immer automatisch
+      # values: |
+      #   deployment:
+      #     image:
+      #       tag: latest
+      #       pullPolicy: Always
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+
+  # Automatic sync policy
+  syncPolicy:
+    automated:
+      prune: true        # Löscht Ressourcen, die nicht mehr im Repo sind
+      selfHeal: true     # Auto-sync bei Abweichungen
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
