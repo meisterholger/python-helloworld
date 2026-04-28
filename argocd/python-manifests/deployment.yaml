@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: mein-container
-        image: meisterholger/python-helloworld:v13
+        image: meisterholger/python-helloworld:v14
         ports:
         - containerPort: 5000
