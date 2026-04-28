@@ -6,7 +6,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: flask-kreditrechner # WICHTIG: Muss exakt mit dem Label in deinem Flask-Deployment übereinstimmen!
+    app: meine-web-app # WICHTIG: Muss exakt mit dem Label in deinem Flask-Deployment übereinstimmen!
   ports:
     - protocol: TCP
       port: 5000       # Port innerhalb des Clusters
