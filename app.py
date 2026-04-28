@@ -44,7 +44,7 @@ def metrics():
 def hello():
     app.logger.info('Main request successfull')
 
-    return "Hello World!"
+    return "Hello World! This is a Python Flask application running in Kubernetes with ArgoCD"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
