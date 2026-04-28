@@ -39,14 +39,14 @@ jobs:
         run: |
           sed -i "s|image: meisterholger/python-helloworld:.*|image: meisterholger/python-helloworld:v${{ github.run_number }}|g" argocd/python-manifests/deployment.yaml
 
-      - name: Update values.yaml
+      - name: Update helm values.yaml
         run: |
-          sed -i "s|tag: .*|tag: v${{ github.run_number }}|g" helm/values.yaml
+          sed -i "s|^\s*tag: .*$|    tag: v${{ github.run_number }}|" helm/values.yaml
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git add argocd/python-manifests/deployment.yaml
+          git add argocd/python-manifests/deployment.yaml helm/values.yaml
           git commit -m "Bump image version to v${{ github.run_number }}"
           git push
