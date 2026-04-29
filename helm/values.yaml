@@ -5,7 +5,7 @@ app:
 
 ## Namespace configuration
 namespace:
-  name: default
+  name: test
 
 ## Deployment configuration
 deployment:
